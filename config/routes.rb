@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+  resources :flights
+  resources :passengers
+  resources :airports
+  resources :bookings
+  resources :tickets
 
   root to: "flights#index"
 end

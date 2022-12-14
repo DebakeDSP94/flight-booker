@@ -1,0 +1,17 @@
+<p><strong><%= flight.origin_airport.iata_code %> =>
+<%= flight.destination_airport.iata_code %></strong></p>
+
+<p><strong>Airline: </strong><%= flight.airline.name %></p>
+
+<p><strong>Flight Number: </strong><%= flight.flight_number %></p>
+
+<p><strong>Departure Time: </strong><%= flight.departure_time.strftime("%m/%d/%Y %k:%M") %></p>
+
+<% arrival_time = flight.departure_time + flight.duration.minutes %>
+<p><strong>Arrival Time: </strong><%= arrival_time.strftime("%m/%d/%Y %k:%M") %></p>
+
+<% hours = flight.duration / 60 %>
+<% minutes = flight.duration % 60 %>
+<p><strong>Duration: </strong><%= "#{hours}:#{minutes}" %></p>
+
+<%= link_to "Book Flight", bookings_path(flight), class: "btn btn-primary"%>

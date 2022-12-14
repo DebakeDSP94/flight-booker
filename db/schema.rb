@@ -10,30 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_15_183553) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_13_001221) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "bookings", force: :cascade do |t|
+  create_table "airlines", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "airports", force: :cascade do |t|
+    t.string "name"
+    t.string "iata_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "flights", force: :cascade do |t|
+    t.string "flight_number"
+    t.bigint "airline_id", null: false
+    t.bigint "origin_id", null: false
+    t.bigint "destination_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "duration"
+    t.datetime "departure_time"
+    t.date "departure_date"
+    t.index ["airline_id"], name: "index_flights_on_airline_id"
+    t.index ["destination_id"], name: "index_flights_on_destination_id"
+    t.index ["origin_id"], name: "index_flights_on_origin_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+  create_table "tickets", force: :cascade do |t|
+    t.string "passenger_name"
+    t.bigint "flight_id", null: false
+    t.string "seat"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["flight_id"], name: "index_tickets_on_flight_id"
   end
 
+  add_foreign_key "flights", "airlines"
+  add_foreign_key "flights", "airports", column: "destination_id"
+  add_foreign_key "flights", "airports", column: "origin_id"
+  add_foreign_key "tickets", "flights"
 end
