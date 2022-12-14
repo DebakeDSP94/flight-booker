@@ -2,8 +2,6 @@
 
 one:
   name: MyString
-  iata_code: MyString
 
 two:
   name: MyString
-  iata_code: MyString

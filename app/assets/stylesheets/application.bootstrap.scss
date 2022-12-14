@@ -1,2 +1,16 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+.title {
+	display: flex;
+	justify-content: center;
+}
+
+.flight {
+	color: black;
+	margin: 10px;
+}
+
+.submit-btn {
+	margin: 10px;
+}
