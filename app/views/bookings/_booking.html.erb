@@ -1,0 +1,42 @@
+<div class="row">
+<div class="col-md-4"></div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="title">
+        <h1>All Bookings</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="album py-5 bg-transparent">
+        <div class="container-fluid flights">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <% @bookings.each do |booking| %>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <div class="card-body">
+                    <div class="card-text">
+                      <p><strong>Origin: </strong><%= booking.flight.origin_airport.name %></p>
+                      <p><strong>Destination: </strong><%= booking.flight.destination_airport.name %></p>
+                      <p><strong>Airline: </strong><%= booking.flight.airline.name %></p>
+                      <p><strong>Flight: </strong><%= booking.flight.flight_number %></p>
+                      <p><strong>Passenger list: </strong>
+                        <% booking.passengers.all.each do |passenger| %>
+                          <p><strong>Name: </strong><%= passenger.passenger_name %></p>
+                          <p><strong>Email: </strong><%= passenger.passenger_email %></p>
+                        <% end %></p>
+                      <%= link_to "View This Booking", booking, class: "btn btn-outline-primary" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -17,8 +17,8 @@ airports =
   %w[Miami MIA],
   ["Houston Intercontinental", "IAH"],
   %w[Pittsburg PIT],
-  %w[Chicago CHI],
-  %w[Minnesota MIN]
+  ["Las Vegas", "LAS"],
+  %w[Atlanta ATL]
 
 airports.each do |name, city_code|
   Airport.create!(name: name, iata_code: city_code)
@@ -33,7 +33,7 @@ Airport.all.each do |departure|
     next if departure == arrival
     Airline.all.each do |airline|
       duration = rand(100..300)
-      60.times do
+      30.times do
         flight_number = rand(1000..1999)
         Flight.create!(
           origin_id: departure.id,
@@ -41,7 +41,12 @@ Airport.all.each do |departure|
           duration: duration,
           flight_number: flight_number,
           airline_id: airline.id,
-          departure_time: Faker::Time.forward(days: 60, period: :all)
+          departure_time:
+            Faker::Time.between_dates(
+              from: Date.today - 1,
+              to: Date.today + 30,
+              period: :day
+            )
         )
       end
     end

@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <div class="card">
+      <h2 class="title">Book flight from: <%= @flight.origin_airport.name %></h2>
+      <h2 class="title"> to: <%= @flight.destination_airport.name %></h2>
+      <h2 class="title">Flying on: <%= @flight.airline.name %></h2>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <div class="card">
+      <%= form_with model: @booking do |form| %>
+        <%= form.hidden_field :flight_id, value: @flight.id %>
+        <%= form.fields_for :passengers do |ff| %>
+          Passenger: <%= (ff.options[:child_index] + 1) %>
+          <div class="form-group" id="add-passenger">
+            <%= ff.label :passenger_name %>
+            <%= ff.text_field :passenger_name, class: 'form-control' %>
+            <%= ff.label :passenger_email %>
+            <%= ff.text_field :passenger_email, class: 'form-control' %>
+            <p></p>
+            </div>
+          <% end %>
+        <%= form.submit 'Submit', class:"btn btn-primary submit-btn" %>
+      <% end %>
+    </div>
+  </div>
+</div>
