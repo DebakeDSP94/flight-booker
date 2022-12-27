@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_13_001221) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_20_182850) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,6 +25,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_13_001221) do
     t.string "iata_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "flight_id", null: false
+    t.index ["flight_id"], name: "index_bookings_on_flight_id"
   end
 
   create_table "flights", force: :cascade do |t|
@@ -42,17 +49,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_13_001221) do
     t.index ["origin_id"], name: "index_flights_on_origin_id"
   end
 
-  create_table "tickets", force: :cascade do |t|
+  create_table "passengers", force: :cascade do |t|
     t.string "passenger_name"
-    t.bigint "flight_id", null: false
-    t.string "seat"
+    t.string "passenger_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["flight_id"], name: "index_tickets_on_flight_id"
+    t.bigint "booking_id", null: false
+    t.index ["booking_id"], name: "index_passengers_on_booking_id"
   end
 
+  add_foreign_key "bookings", "flights"
   add_foreign_key "flights", "airlines"
   add_foreign_key "flights", "airports", column: "destination_id"
   add_foreign_key "flights", "airports", column: "origin_id"
-  add_foreign_key "tickets", "flights"
+  add_foreign_key "passengers", "bookings"
 end

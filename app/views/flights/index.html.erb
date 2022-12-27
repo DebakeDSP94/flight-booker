@@ -1,7 +1,16 @@
-<div class="title">
-  <h1>Flight Finder</h1>
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="title">
+        <p><h1>Flight Finder</h1></p>
+      </div>
+      <div class="title">
+        <p><h4>Flights are available within a 30 day period from today</h4></p>
+      </div>
+    </div>
+  </div>
 </div>
-
 <%= render "flight_search_form", airports: @airports %>
 <hr>
 <%= render "flight_results_form" %>

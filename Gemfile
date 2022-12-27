@@ -77,3 +77,4 @@ end
 gem 'simple_form', '~> 5.1'
 gem "ruby-lsp", "~> 0.3.6", :group => :development
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
+gem 'vanilla_nested', '~> 1.7'

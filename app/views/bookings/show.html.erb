@@ -1,0 +1,46 @@
+<div class="row">
+<div class="col-md-4"></div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="title">
+        <h1>Your Booking</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="album py-5 bg-transparent">
+        <div class="container-fluid flights">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col">
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  <div class="card-text">
+                    <p><strong>Origin: </strong><%= @booking.flight.origin_airport.name %></p>
+                    <p><strong>Destination: </strong><%= @booking.flight.destination_airport.name %></p>
+                    <p><strong>Airline: </strong><%= @booking.flight.airline.name %></p>
+                    <p><strong>Flight: </strong><%= @booking.flight.flight_number %></p>
+                    <p><strong>Departure Time: </strong><%= @booking.flight.departure_time.strftime("%m/%d/%Y %k:%M") %></p>
+                    <% arrival_time = @booking.flight.departure_time + @booking.flight.duration.minutes %>
+                    <p><strong>Arrival Time: </strong><%= arrival_time.strftime("%m/%d/%Y %k:%M") %></p>
+                    <% hours = @booking.flight.duration / 60 %>
+                    <% minutes = @booking.flight.duration % 60 %>
+                    <p><strong>Duration: </strong><%= "#{hours}:#{minutes}" %></p>
+                    <p><strong>Passenger list: </strong>
+                      <% @booking.passengers.all.each do |passenger| %>
+                        <p><strong>Name: </strong><%= passenger.passenger_name %></p>
+                        <p><strong>Email: </strong><%= passenger.passenger_email %></p>
+                      <% end %></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

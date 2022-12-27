@@ -14,4 +14,10 @@
 <% minutes = flight.duration % 60 %>
 <p><strong>Duration: </strong><%= "#{hours}:#{minutes}" %></p>
 
-<%= link_to "Book Flight", bookings_path(flight), class: "btn btn-primary"%>
+<%= simple_form_for @booking, url: new_booking_path, method: :get do |f| %>
+  <%= f.hidden_field :flight, value: flight.id %>
+  <%= f.hidden_field :passenger_count, value: session[:passenger_count] %>
+  <%= button_tag type: 'submit', class: "btn btn-primary" do %>
+    <span>Book This Flight</span>
+  <% end %>
+<% end %>
