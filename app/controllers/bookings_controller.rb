@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: %i[show edit update destroy]
-  before_action :set_passenger, only: %i[show edit update destroy]
+  before_action :set_booking, only: %i[show]
+  before_action :set_passenger, only: %i[show]
   before_action :set_flight, only: %i[new]
 
   def new
@@ -16,7 +16,7 @@ class BookingsController < ApplicationController
       if @booking.save
         format.html { redirect_to @booking }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to root_url, status: :unprocessable_entity }
       end
     end
   end
@@ -26,30 +26,6 @@ class BookingsController < ApplicationController
   end
 
   def show
-  end
-
-  def edit
-  end
-
-  def update
-    respond_to do |format|
-      if @booking.update(booking_params)
-        format.html do
-          redirect to bookings_path,
-                      success: "Booking has been successfully updated."
-        end
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def destroy
-    @booking.destroy
-
-    respond_to do |format|
-      format.html { redirect_to bookings_path, status: :see_other }
-    end
   end
 
   private
@@ -68,12 +44,8 @@ class BookingsController < ApplicationController
 
   def booking_params
     params.fetch(:booking, {}).permit(
-      :flight,
       :flight_id,
-      :arrival_airport,
-      :departure_airport,
       :passenger_count,
-      :airline,
       passengers_attributes: %i[id passenger_name passenger_email]
     )
   end
