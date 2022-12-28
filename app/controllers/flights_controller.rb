@@ -50,13 +50,8 @@ class FlightsController < ApplicationController
 
   def flight_params
     params.fetch(:flights, {}).permit(
-      :flights,
-      :flight_number,
-      :duration,
       :origin_id,
-      :airline_id,
       :destination_id,
-      :departure_time,
       :departure_date,
       :passenger_count
     )
