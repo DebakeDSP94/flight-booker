@@ -24,7 +24,7 @@ airports.each do |name, city_code|
   Airport.create!(name: name, iata_code: city_code)
 end
 
-airlines = %W[Delta American Southwest Virgin United]
+airlines = %W[Delta American United]
 
 airlines.each { |airline| Airline.create! name: airline }
 
