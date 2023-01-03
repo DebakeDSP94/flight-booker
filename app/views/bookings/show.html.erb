@@ -22,9 +22,10 @@
                     <p><strong>Destination: </strong><%= @booking.flight.destination_airport.name %></p>
                     <p><strong>Airline: </strong><%= @booking.flight.airline.name %></p>
                     <p><strong>Flight: </strong><%= @booking.flight.flight_number %></p>
-                    <p><strong>Departure Time: </strong><%= @booking.flight.departure_time.strftime("%m/%d/%Y %k:%M") %></p>
+                    <p><strong>Departure Date: </strong><%= @booking.flight.departure_time.strftime("%b %d, %Y") %></p>
+                    <p><strong>Departure Time: </strong><%= @booking.flight.departure_time.strftime("%l:%M %P") %></p>
                     <% arrival_time = @booking.flight.departure_time + @booking.flight.duration.minutes %>
-                    <p><strong>Arrival Time: </strong><%= arrival_time.strftime("%m/%d/%Y %k:%M") %></p>
+                    <p><strong>Arrival Time: </strong><%= arrival_time.strftime("%l:%M %P") %></p>
                     <% hours = @booking.flight.duration / 60 %>
                     <% minutes = @booking.flight.duration % 60 %>
                     <p><strong>Duration: </strong><%= "#{hours}:#{minutes}" %></p>

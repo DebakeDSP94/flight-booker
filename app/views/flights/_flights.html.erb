@@ -5,10 +5,12 @@
 
 <p><strong>Flight Number: </strong><%= flight.flight_number %></p>
 
-<p><strong>Departure Time: </strong><%= flight.departure_time.strftime("%m/%d/%Y %k:%M") %></p>
+<p><strong>Departure Date: </strong><%= flight.departure_date.strftime("%b %d, %Y") %></p>
+
+<p><strong>Departure Time: </strong><%= flight.departure_time.strftime("%l:%M %P") %></p>
 
 <% arrival_time = flight.departure_time + flight.duration.minutes %>
-<p><strong>Arrival Time: </strong><%= arrival_time.strftime("%m/%d/%Y %k:%M") %></p>
+<p><strong>Arrival Time: </strong><%= arrival_time.strftime("%l:%M %P") %></p>
 
 <% hours = flight.duration / 60 %>
 <% minutes = flight.duration % 60 %>
