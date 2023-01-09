@@ -65,6 +65,7 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  gem "letter_opener"
 end
 
 group :test do
@@ -78,3 +79,4 @@ gem 'simple_form', '~> 5.1'
 gem "ruby-lsp", "~> 0.3.6", :group => :development
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
 gem 'vanilla_nested', '~> 1.7'
+gem 'dotenv'

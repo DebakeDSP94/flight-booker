@@ -1,0 +1,21 @@
+<div class="card-text">
+  <%= @greeting %>
+  <p>Thank you for booking on flight <%= @booking.flight.flight_number %> on <%= @booking.flight.airline.name %> airlines.</p>
+
+  <p>Please visit <%= link_to "booking page", @booking %> to view your booking.</p>
+
+  <p>Your confirmation number is  <%= rand(100000..999999) %></p>
+  <p>You are flying from <%= @booking.flight.origin_airport.name %> to <%= @booking.flight.destination_airport.name %></p>
+
+  <p>Departure Date: <%= @booking.flight.departure_time.strftime("%b %d, %Y") %></p>
+  <p>Departure Time: <%= @booking.flight.departure_time.strftime("%l:%M %P") %></p>
+  <% arrival_time = @booking.flight.departure_time + @booking.flight.duration.minutes %>
+  <p>Arrival Time: <%= arrival_time.strftime("%l:%M %P") %></p>
+  <% hours = @booking.flight.duration / 60 %>
+  <% minutes = @booking.flight.duration % 60 %>
+  <p>Duration: <%= "#{hours}:#{minutes}" %></p>
+  <p>Passenger list:
+    <% @booking.passengers.all.each do |passenger| %>
+      <p><%= passenger.passenger_name %><span>   </span>   Email: <%= passenger.passenger_email %></p>
+    <% end %></p>
+</div>

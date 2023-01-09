@@ -14,6 +14,9 @@ class BookingsController < ApplicationController
 
     respond_to do |format|
       if @booking.save
+        flash.notice =
+          "Flight #{@booking.flight.flight_number} has been booked.  Check your inbox for a confirmation email."
+        BookingMailer.new_booking(@booking).deliver_now
         format.html { redirect_to @booking }
       else
         format.html { redirect_to root_url, status: :unprocessable_entity }
