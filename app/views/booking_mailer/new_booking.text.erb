@@ -1,0 +1,21 @@
+<%= @greeting %>
+Thank you for booking on Flight <%= @booking.flight.flight_number %> on <%= @booking.flight.airline.name %> airlines.
+
+Please visit <%= booking_url(@booking) %> to view your booking.
+
+Your confirmation number is <%= rand(100000..999999) %>
+
+You are flying from <%= @booking.flight.origin_airport.name %> to <%= @booking.flight.destination_airport.name %>
+
+Departure date: <%= @booking.flight.departure_time.strftime("%b %d, %Y") %>
+Departure time: <%= @booking.flight.departure_time.strftime("%l:%M %P")%>
+<% arrival_time = @booking.flight.departure_time + @booking.flight.duration.minutes %>
+Arrival time: <%= arrival_time.strftime("%l:%M %P")%>
+<% hours = @booking.flight.duration / 60 %>
+<% minutes = @booking.flight.duration % 60 %>
+Flight Duration: <%= "#{hours}:#{minutes}" %>
+
+Passengers:
+<% @booking.passengers.each do |passenger|%>
+  <%= passenger.passenger_name %> Email: <%= passenger.passenger_email %>
+<% end %>
